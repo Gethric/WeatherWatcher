@@ -3,7 +3,7 @@ import "./temp.styles.scss";
 
 const Temp = temp => (
 	<div className="temp">
-		<p>{temp.temp}</p>
+		<p>{temp.temp}C</p>
 	</div>
 );
 

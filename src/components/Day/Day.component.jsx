@@ -4,7 +4,6 @@ import "./day.styles.scss";
 const Day = day => {
 	const date = Date(day);
 	const now = date.split(" ");
-	console.log(now);
 
 	return (
 		<div className="day">

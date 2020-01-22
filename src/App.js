@@ -1,8 +1,9 @@
 import React from "react";
 import Unit from "./components/Unit/Unit.component";
+import "./App.css";
 
 const App = () => (
-	<div>
+	<div className="app">
 		<Unit />
 	</div>
 );
