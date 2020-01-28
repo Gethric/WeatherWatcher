@@ -25,7 +25,6 @@ class Unit extends React.Component {
 	}
 
 	getWeather(lat, lon) {
-		console.log(lat, lon);
 		fetch(
 			`${this.state.APICall}${this.state.APICallType}lat=${lat}&lon=${lon}&units=metric${this.state.APIKEY}`
 		)
@@ -39,7 +38,13 @@ class Unit extends React.Component {
 	componentDidMount() {
 		this.getLocation()
 			.then(position => {
-				this.getWeather(position.coords.latitude, position.coords.longitude);
+				this.setState({ location: position });
+			})
+			.then(() => {
+				this.getWeather(
+					this.state.location.coords.latitude,
+					this.state.location.coords.longitude
+				);
 			})
 			.catch(err => console.log(err.message));
 	}
