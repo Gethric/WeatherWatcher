@@ -2,7 +2,7 @@ import WeatherActionTypes from "./weather.types";
 import WEATHER_DATA from "./weather.data";
 
 const INITIAL_STATE = {
-	KEY: "&APPID=05615a6a4a2bc606fbffb5d1676a40e0",
+	KEY: `${process.env.REACT_APP_KEY}`,
 	API: "http://api.openweathermap.org/data/2.5/",
 	CallType: "weather?",
 	isFetching: false,
