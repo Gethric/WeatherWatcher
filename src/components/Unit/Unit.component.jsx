@@ -8,7 +8,7 @@ class Unit extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			APIKEY: "&APPID=05615a6a4a2bc606fbffb5d1676a40e0",
+			APIKEY: `${process.env.REACT_APP_KEY}`,
 			APICall: "http://api.openweathermap.org/data/2.5/",
 			APICallType: "weather?"
 		};
