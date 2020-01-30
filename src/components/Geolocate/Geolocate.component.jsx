@@ -5,7 +5,7 @@ import { fetchLocation } from "../../Redux/Location/location.actions";
 
 const Geolocate = ({ fetchLocation, lat, lon }) => (
 	<div className="get_location">
-		<button onClick={fetchLocation}>Click me!</button>
+		<button onClick={fetchLocation}>Get Location</button>
 		<span className="show_location">{lat}</span>
 		<span className="show_location">{lon}</span>
 	</div>
@@ -16,7 +16,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-	console.log(state);
 	return {
 		lat: state.location.location.coords.latitude,
 		lon: state.location.location.coords.longitude

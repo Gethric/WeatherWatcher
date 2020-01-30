@@ -51,7 +51,6 @@ class Unit extends React.Component {
 
 	render() {
 		const weather = this.state.weather;
-		console.log(this.state);
 
 		return weather ? (
 			<div className="unit">

@@ -21,12 +21,11 @@ export const fetchLocationFailure = error => {
 	};
 };
 
-export function fetchLocation() {
+export const fetchLocation = () => {
 	return dispatch => {
 		dispatch(fetchLocationRequest());
-
 		return getLocation().then(position =>
 			dispatch(fetchLocationReceive(position))
 		);
 	};
-}
+};
