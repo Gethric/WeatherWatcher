@@ -1,65 +1,44 @@
 import React from "react";
 import "./unit.styles.scss";
+import { connect } from "react-redux";
 import Icon from "../Icon/Icon.component";
 import Day from "../Day/Day.component";
 import Temp from "../Temp/Temp.component";
+import { fetchLocation } from "../../Redux/Location/location.actions";
+import { fetchWeather } from "../../Redux/Weather/weather.actions";
 
 class Unit extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			APIKEY: `${process.env.REACT_APP_KEY}`,
-			APICall: "http://api.openweathermap.org/data/2.5/",
-			APICallType: "weather?"
-		};
-	}
-
-	getLocation() {
-		if (!navigator.geolocation) {
-			alert("Geolocation is not supported by your browser");
-		} else {
-			return new Promise(function(resolve, reject) {
-				navigator.geolocation.getCurrentPosition(resolve, reject);
-			});
-		}
-	}
-
-	getWeather(lat, lon) {
-		fetch(
-			`${this.state.APICall}${this.state.APICallType}lat=${lat}&lon=${lon}&units=metric${this.state.APIKEY}`
-		)
-			.then(res => res.json())
-			.then(data => {
-				this.setState({ weather: data });
-			})
-			.catch(console.log);
+		this.state = {};
 	}
 
 	componentDidMount() {
-		this.getLocation()
-			.then(position => {
-				this.setState({ location: position });
-			})
-			.then(() => {
-				this.getWeather(
-					this.state.location.coords.latitude,
-					this.state.location.coords.longitude
-				);
-			})
-			.catch(err => console.log(err.message));
+		const { fetchLocation, fetchWeather } = this.props;
+		fetchLocation().then(() => fetchWeather());
 	}
 
 	render() {
-		const weather = this.state.weather;
-
+		const weather = this.props;
 		return weather ? (
 			<div className="unit">
-				<Icon weather_id={weather.weather[0].id} />
-				<Day day={weather.dt} />
-				<Temp temp={weather.main.temp} />
+				<Icon weather_id={weather.weather.weather[0].id} />
+				<Day day={weather.weather.dt} />
+				<Temp temp={weather.weather.main.temp} />
 			</div>
 		) : null;
 	}
 }
 
-export default Unit;
+const mapStateToProps = state => {
+	return {
+		weather: state.weather.weather
+	};
+};
+
+const mapDispatchToProps = dispatch => ({
+	fetchLocation: () => dispatch(fetchLocation()),
+	fetchWeather: () => dispatch(fetchWeather())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Unit);

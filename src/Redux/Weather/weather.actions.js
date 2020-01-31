@@ -25,8 +25,6 @@ export const fetchWeather = () => {
 	return (dispatch, getState) => {
 		const { weather, location } = getState();
 
-		console.log(weather);
-		console.log(location);
 		dispatch(fetchWeatherRequest());
 
 		return getWeather(
@@ -38,7 +36,6 @@ export const fetchWeather = () => {
 		)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				dispatch(fetchWeatherReceive(data));
 			});
 	};
