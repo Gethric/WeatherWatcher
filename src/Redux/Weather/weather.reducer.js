@@ -3,7 +3,8 @@ import WEATHER_DATA from "./weather.data";
 
 const INITIAL_STATE = {
 	KEY: `${process.env.REACT_APP_KEY}`,
-	API: "http://api.openweathermap.org/data/2.5/",
+	API:
+		"https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/",
 	CallType: "weather?",
 	isFetching: false,
 	errorMessage: undefined,
